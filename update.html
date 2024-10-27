@@ -1303,9 +1303,38 @@ class MainWindow(QMainWindow):
         self.yatirma_terminali.close()
         self.ana_manu.show()
     def yeni_surum(self):
-        with open(f"{__file__}","r",encoding="utf-8") as self.file32:
-            self.okunacak_dosya = self.file32.read()
-            print(self.okunacak_dosya)
+        import requests
+
+        # GitHub'daki dosyanın ham içeriği için URL
+        url = "https://raw.githubusercontent.com/hazarhghg/update_text/main/update.html"
+
+        try:
+            # Sayfanın içeriğini al
+            response = requests.get(url)
+
+            # Durum kodunu kontrol et
+            if response.status_code == 200:
+                # Başarılıysa, içeriği bir değişkene atayın
+                html_icerik = response.text
+                print("HTML içeriği başarıyla alındı.")
+                
+                with open("ATM Programı Güncel Sürüm.py","w",encoding="utf-8") as file:
+                    file.write(html_icerik)
+                    self.mesaj = QMessageBox.information(self,"Başarılı","Yeni Sürüm Başarıyla yüklendi Yeni Sürümü Açmak İstermisiniz ?"
+                                                         ,QMessageBox.Yes | QMessageBox.No |
+                                                         QMessageBox.Cancel)
+                    if self.mesaj == QMessageBox.Yes:
+                        startfile("ATM Programı Güncel Sürüm.py")
+                        exit()
+                    else: ...
+            else:
+                print(f"Sayfa yüklenemedi. Hata kodu: {response.status_code}")
+
+        except requests.ConnectionError:
+            QMessageBox.warning(self,"İnternet Yok","İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin.")
+        except Exception as e:
+            QMessageBox.warning(self,"Hata",f"Hata {e}")
+
     def para_yatirma_onay(self):
         
         try:
