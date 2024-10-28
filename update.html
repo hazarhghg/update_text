@@ -78,6 +78,15 @@ class Transfer(object):
         self.lineEdit_hesaba_yatirilacak_para.setPlaceholderText(_translate("MainWindow", "Para Transferi Yapılacak Hesaba Yatırılacak Para:"))
         self.pushButton_parayi_gonder.setText(_translate("MainWindow", "Parayı Gönder"))
         self.pushButton_ana_menuye_don.setText(_translate("MainWindow", "Ana Menüye Dön"))
+
+
+    def closeEvent(self, event):
+        reply = QMessageBox.question(self, 'Emin Misin', 'Programdan gerçekten çıkmak istediğinden emin misin ?',
+                                    QMessageBox.Yes | QMessageBox.No, QMessageBox.Cancel)
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
 class Transferim(QMainWindow):
 
     def __init__(self):
@@ -1548,10 +1557,35 @@ class MainWindow(QMainWindow):
             self.kulanici_girisi.show()
 
     def hakkimda_dan_ana_menuye_don(self):
+        self.text_mesaji = self.hakkimda.hakkimda_terminali.textEdit_hakkimda.toPlainText()
+        self.cursor.execute("SELECT * FROM NOW")
+        self.now = self.cursor.fetchall()
+        self.cursor.execute("SELECT * FROM VERİLER WHERE rowid = ?" , (self.now[0][0], ))
+        self.veriler = self.cursor.fetchall()
+        if str(self.text_mesaji) == str(self.veriler[0][3]):
+            self.hakkimda.close()
+            self.ana_manu.show()
+        
+        if str(self.text_mesaji) != str(self.veriler[0][3]):
+            self.onaylama_mesaji = QMessageBox.question(self,"Emin misiniz","Kaydetmediğiniz değişiklikler var.\n\nDeğişiklikleri kaydetmek istiyor musunuz ?",
+                                                        QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
 
-        self.hakkimda.close()
-        self.ana_manu.show()
+            if self.onaylama_mesaji == QMessageBox.Yes:
+                
+                self.girilen_yazi = self.hakkimda.hakkimda_terminali.textEdit_hakkimda.toPlainText()
+                self.cursor.execute("SELECT * FROM NOW")
+                self.now = self.cursor.fetchall()
 
+                self.cursor.execute("UPDATE VERİLER SET hakkimda = ? WHERE rowid = ?" , ( self.girilen_yazi, self.now[0][0] ) )
+                self.conn.commit()
+                self.hakkimda.close()
+                self.ana_manu.show()
+
+            if self.onaylama_mesaji == QMessageBox.No or self.onaylama_mesaji == QMessageBox.Cancel:
+                self.hakkimda.close()
+                self.ana_manu.show()
+            else: ...
+        else: ...
     def hakkimda_nedir(self):
 
         QMessageBox.information(self,"Hakkımda Nedir","Hakkımda Hakkınızdaki Bütün Bilgileri Yazabilirsiniz : )")
