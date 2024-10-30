@@ -1125,131 +1125,153 @@ class MainWindow(QMainWindow):
             self.conn.commit()
             self.kulanici_girisi.show()
     def giris_yap(self):
-        self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kulanici_girisi.giris.lineEdit_kullanici_adi.text() , self.kulanici_girisi.giris.lineEdit_parola.text() ) )
-        self.gercek = self.cursor.fetchall()
-        self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kulanici_girisi.giris.lineEdit_kullanici_adi.text() , self.kulanici_girisi.giris.lineEdit_parola.text() ) )
-        self.conn.commit()
-        self.bilgiler = self.cursor.fetchall()
-        if self.bilgiler == []:
-            QMessageBox.critical(self,"Hata", "Kullanıcı adı veya Parola Hatalı !")
-        if self.bilgiler != []:
-            if self.bilgiler[0].count(None) == 0 and len(str(self.bilgiler[0][4])) < 16 and len(str(self.bilgiler[0][4])) > 2 and int(self.bilgiler[0][4]) > 99 and int(self.bilgiler[0][4]) < 1000000000000000 and str(type(int(self.bilgiler[0][2]))) == "<class 'int'>":
-                self.cursor.execute("UPDATE NOW SET no = ? WHERE rowid = 1" , ( self.bilgiler[0][-1], ) )
-                self.giris_yapilma = datetime.datetime.now()
-                self.gercek_giris_yapilma = f"Tarih: {self.giris_yapilma.year}/{self.giris_yapilma.month}/{self.giris_yapilma.day}   Saat: {self.giris_yapilma.hour}:{self.giris_yapilma.minute}:{self.giris_yapilma.second} "
-                self.cursor.execute("SELECT * FROM NOW")
-                self.now = self.cursor.fetchall()
-                self.cursor.execute("UPDATE VERİLER SET giris_yapilma = ? WHERE rowid = ?" , ( self.gercek_giris_yapilma, self.now[0][0] ) )
-                self.conn.commit()
-                self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.bilgiler[0][0]}")
-                self.conn.commit()
-                self.kulanici_girisi.close()
-                self.ana_manu.show()
-                if int(self.bilgiler[0][5]) != 0:
-                    QMessageBox.information(self,"Bilgi",f"Hesabınıza {self.bilgiler[0][5]} Kere Para Transferi Yapıldı : )")
-                    self.cursor.execute("UPDATE VERİLER SET yardim = ? WHERE rowid = ?" , ( 0, self.now[0][0] ) )
-                    self.conn.commit()
-            else:
-                self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?",(self.bilgiler[0][0],self.bilgiler[0][1]))
-                self.numara = self.cursor.fetchall()
-                self.cursor.execute("UPDATE NOW SET no = 0")
-                self.conn.commit()
+        self.cursor.execute("SELECT * FROM NOW")
+        self.now = self.cursor.fetchall()
+        self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE rowid = ?",(self.now[0][0],))
+        self.veriler = self.cursor.fetchall()
+        if int(self.now[0][0]) != 0:
+            QMessageBox.critical(self,"Hata","Şu an zaten bir hesap içerisindesiniz !!!")
+            self.kulanici_girisi.close()
+            self.ana_manu.show()
+            self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.veriler[0][0]}")
+        else:
                 
-                self.ana_manu.close()
-                self.kulanici_girisi.show()
-                self.hatamesaji = QMessageBox()
-                self.hatamesaji.setWindowTitle("Hata")
-                self.hatamesaji.setText(f"Bu hesap malesef bozuk veya hatalı Lütfen tekrar deneyin\n\nBu hesabı KALICI olarak Silmek İstermisiniz ?\n\nHata Kodu: {str(self.error_code)}")
-                self.hatamesaji.setIcon(QMessageBox.Question)
-                self.yes_button = self.hatamesaji.addButton("Evet, Bu Hesabı Silmek İstiyorum", QMessageBox.YesRole)
-                self.no_button = self.hatamesaji.addButton("Hayır, Onaylamıyorum", QMessageBox.NoRole)
-                self.cancel_button = self.hatamesaji.addButton("İptal", QMessageBox.RejectRole)
-                self.hatamesaji.exec_()
-                if self.hatamesaji.clickedButton() == self.yes_button:
-                    self.cursor.execute("DELETE FROM VERİLER WHERE rowid = ?",(self.gercek[0][-1],))
+            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kulanici_girisi.giris.lineEdit_kullanici_adi.text() , self.kulanici_girisi.giris.lineEdit_parola.text() ) )
+            self.gercek = self.cursor.fetchall()
+            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kulanici_girisi.giris.lineEdit_kullanici_adi.text() , self.kulanici_girisi.giris.lineEdit_parola.text() ) )
+            self.conn.commit()
+            self.bilgiler = self.cursor.fetchall()
+            if self.bilgiler == []:
+                QMessageBox.critical(self,"Hata", "Kullanıcı adı veya Parola Hatalı !")
+            if self.bilgiler != []:
+                if self.bilgiler[0].count(None) == 0 and len(str(self.bilgiler[0][4])) < 16 and len(str(self.bilgiler[0][4])) > 2 and int(self.bilgiler[0][4]) > 99 and int(self.bilgiler[0][4]) < 1000000000000000 and str(type(int(self.bilgiler[0][2]))) == "<class 'int'>":
+                    self.cursor.execute("UPDATE NOW SET no = ? WHERE rowid = 1" , ( self.bilgiler[0][-1], ) )
+                    self.giris_yapilma = datetime.datetime.now()
+                    self.gercek_giris_yapilma = f"Tarih: {self.giris_yapilma.year}/{self.giris_yapilma.month}/{self.giris_yapilma.day}   Saat: {self.giris_yapilma.hour}:{self.giris_yapilma.minute}:{self.giris_yapilma.second} "
+                    self.cursor.execute("SELECT * FROM NOW")
+                    self.now = self.cursor.fetchall()
+                    self.cursor.execute("UPDATE VERİLER SET giris_yapilma = ? WHERE rowid = ?" , ( self.gercek_giris_yapilma, self.now[0][0] ) )
                     self.conn.commit()
-                    QMessageBox.information(self,"Başarılı","Hesap Başarıyla Silindi....")
+                    self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.bilgiler[0][0]}")
+                    self.conn.commit()
+                    self.kulanici_girisi.close()
+                    self.ana_manu.show()
+                    if int(self.bilgiler[0][5]) != 0:
+                        QMessageBox.information(self,"Bilgi",f"Hesabınıza {self.bilgiler[0][5]} Kere Para Transferi Yapıldı : )")
+                        self.cursor.execute("UPDATE VERİLER SET yardim = ? WHERE rowid = ?" , ( 0, self.now[0][0] ) )
+                        self.conn.commit()
+                else:
+                    self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?",(self.bilgiler[0][0],self.bilgiler[0][1]))
+                    self.numara = self.cursor.fetchall()
+                    self.cursor.execute("UPDATE NOW SET no = 0")
+                    self.conn.commit()
                     
-                elif self.hatamesaji.clickedButton() == self.no_button:
-                    pass
-                elif self.hatamesaji.clickedButton() == self.cancel_button:
-                   pass
+                    self.ana_manu.close()
+                    self.kulanici_girisi.show()
+                    self.hatamesaji = QMessageBox()
+                    self.hatamesaji.setWindowTitle("Hata")
+                    self.hatamesaji.setText(f"Bu hesap malesef bozuk veya hatalı Lütfen tekrar deneyin\n\nBu hesabı KALICI olarak Silmek İstermisiniz ?\n\nHata Kodu: {str(self.error_code)}")
+                    self.hatamesaji.setIcon(QMessageBox.Question)
+                    self.yes_button = self.hatamesaji.addButton("Evet, Bu Hesabı Silmek İstiyorum", QMessageBox.YesRole)
+                    self.no_button = self.hatamesaji.addButton("Hayır, Onaylamıyorum", QMessageBox.NoRole)
+                    self.cancel_button = self.hatamesaji.addButton("İptal", QMessageBox.RejectRole)
+                    self.hatamesaji.exec_()
+                    if self.hatamesaji.clickedButton() == self.yes_button:
+                        self.cursor.execute("DELETE FROM VERİLER WHERE rowid = ?",(self.gercek[0][-1],))
+                        self.conn.commit()
+                        QMessageBox.information(self,"Başarılı","Hesap Başarıyla Silindi....")
+                        
+                    elif self.hatamesaji.clickedButton() == self.no_button:
+                        pass
+                    elif self.hatamesaji.clickedButton() == self.cancel_button:
+                        pass
 
-            
+                
 
     def transfer_sifre_olusumu(self):
         pass
 
-    def kaydol(self): 
+    def kaydol(self):
+        self.cursor.execute("SELECT * FROM NOW")
+        self.now = self.cursor.fetchall()
+        self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE rowid = ?",(self.now[0][0],))
+        self.veriler = self.cursor.fetchall()
+        if int(self.now[0][0]) != 0:
+            QMessageBox.critical(self,"Hata","Şu an zaten bir hesap içerisindesiniz !!!")
+            self.kulanici_girisi.close()
+            self.ana_manu.show()
+            self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.veriler[0][0]}")
 
-        self.kullanici_adi = self.kulanici_girisi.giris.lineEdit_kullanici_adi.text()
-        self.parola = self.kulanici_girisi.giris.lineEdit_parola.text()
-        self.transfer_kodu = randint(100,999999999999999)
-        if 1 == 2:
-            pass
-        elif len(self.kullanici_adi) < 17 and len(self.kullanici_adi) > 3 or len(self.kullanici_adi) == 17:
+        else:
 
-            if len(self.parola) > 4 and len(self.parola) < 20 or len(self.parola) == 20:
+            self.kullanici_adi = self.kulanici_girisi.giris.lineEdit_kullanici_adi.text()
+            self.parola = self.kulanici_girisi.giris.lineEdit_parola.text()
+            self.transfer_kodu = randint(100,999999999999999)
+            if 1 == 2:
+                pass
+            elif len(self.kullanici_adi) < 17 and len(self.kullanici_adi) > 3 or len(self.kullanici_adi) == 17:
 
-                if self.kullanici_adi.count(":") == 0 and self.kullanici_adi.count(".") == 0 and self.kullanici_adi.count(",") == 0 and self.kullanici_adi.count(";") == 0 and self.kullanici_adi.count("*") == 0 and self.kullanici_adi.count("|") == 0 and self.kullanici_adi.count("\\") == 0 and self.kullanici_adi.count("}") == 0 and self.kullanici_adi.count("]") == 0 and self.kullanici_adi.count("[") == 0 and self.kullanici_adi.count("{") == 0 and self.kullanici_adi.count("½") == 0 and self.kullanici_adi.count("$") == 0 and self.kullanici_adi.count("#") == 0 and self.kullanici_adi.count("£") == 0 and self.kullanici_adi.count(">") == 0 and self.kullanici_adi.count("<") == 0 and self.kullanici_adi.count("_") == 0 and self.kullanici_adi.count("?") == 0 and self.kullanici_adi.count("=") == 0 and self.kullanici_adi.count("(") == 0 and self.kullanici_adi.count(")") == 0 and self.kullanici_adi.count("/") == 0 and self.kullanici_adi.count("&") == 0 and self.kullanici_adi.count("%") == 0 and self.kullanici_adi.count("+") == 0 and self.kullanici_adi.count("^") == 0 and self.kullanici_adi.count("'") == 0 and self.kullanici_adi.count("!") == 0 and self.kullanici_adi.count("@") == 0:
-                    
-                    if self.parola.count(" ") == 0 and self.parola.count("	 ") == 0:
-                        self.olusturma_tarihi = datetime.datetime.now()
-                        self.gercek_olusturma_tarihi = str(f"{self.olusturma_tarihi.year}/{self.olusturma_tarihi.month}/{self.olusturma_tarihi.day}")
-                        self.gercek_olusturma_zamani = str(f"{self.olusturma_tarihi.hour}:{self.olusturma_tarihi.minute}:{self.olusturma_tarihi.second}")
-                    
-                        self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kullanici_adi , self.parola ) )
-                        self.conn.commit()
-                        self.hepsi = self.cursor.fetchall()
-                        if self.hepsi == []:
-                            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE transfer_kodu = ?" , ( self.transfer_kodu, ) )
-                            self.kod = self.cursor.fetchall()
-                            if self.kod == []:
-                                self.giris_yapilmak = datetime.datetime.now()
-                                self.giris_yapilma_zamani = str(f"Tarih: {self.giris_yapilmak.year}/{self.giris_yapilmak.month}/{self.giris_yapilmak.day}   Saat: {self.giris_yapilmak.hour}:{self.giris_yapilmak.minute}:{self.giris_yapilmak.second}")
-                                self.cursor.execute("""INSERT INTO VERİLER(isim, parola, para, hakkimda, transfer_kodu, yardim, tarih, saat, giris_yapilma, transfer_yapilma_sayisi, transfer_yapma_sayisi) VALUES(?,?,?,?,?,?,?,?,?,?,?)""" , ( self.kullanici_adi, self.parola, 0, "", self.transfer_kodu,0, self.gercek_olusturma_tarihi, self.gercek_olusturma_zamani,  self.giris_yapilma_zamani, 0, 0 ) )
-                                self.conn.commit()
-                                self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kullanici_adi , self.parola ) )
-                                self.conn.commit()
-                                self.hepsi = self.cursor.fetchall()
-                                self.cursor.execute("UPDATE NOW SET no = ? WHERE rowid = 1" , ( self.hepsi[0][-1], ) )
-                                self.conn.commit()
-                                QMessageBox.information(self,"Başarılı","Hesap Başarıyla Oluşturuldu")
-                                self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.hepsi[0][0]}")
-                                self.kulanici_girisi.close()
-                                self.ana_manu.show()
-                            if self.kod != []:
-                                while True:
-                                    if self.kod == []:
-                                        
-                                        self.giris_yapilmak = datetime.datetime.now()
-                                        self.giris_yapilma_zamani = str(f"Tarih: {self.giris_yapilmak.year}/{self.giris_yapilmak.month}/{self.giris_yapilmak.day}   Saat: {self.giris_yapilmak.hour}:{self.giris_yapilmak.minute}:{self.giris_yapilmak.second}")
-                                        self.cursor.execute("""INSERT INTO VERİLER(isim, parola, para, hakkimda, transfer_kodu, yardim, tarih, saat, giris_yapilma, transfer_yapilma_sayisi, transfer_yapma_sayisi) VALUES(?,?,?,?,?,?,?,?,?,?,?)""" , ( self.kullanici_adi, self.parola, 0, "", self.transfer_kodu,0, self.gercek_olusturma_tarihi, self.gercek_olusturma_zamani,  self.giris_yapilma_zamani, 0, 0 ) )
-                                        self.conn.commit()
-                                        self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kullanici_adi , self.parola ) )
-                                        self.conn.commit()
-                                        self.hepsi = self.cursor.fetchall()
-                                        self.cursor.execute("UPDATE NOW SET no = ? WHERE rowid = 1" , ( self.hepsi[0][-1], ) )
-                                        self.conn.commit()
-                                        QMessageBox.information(self,"Başarılı","Hesap Başarıyla Oluşturuldu")
-                                        self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.hepsi[0][0]}")
-                                        self.kulanici_girisi.close()
-                                        self.ana_manu.show()
-                                        break
-                                    self.transfer_kodu = randint(100,9)
-                                    self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE transfer_kodu = ?" , ( self.transfer_kodu, ) )
-                                    self.kod = self.cursor.fetchall()
-                        elif self.hepsi != []:
-                            QMessageBox.critical(self,"Hata","Böyle bir Hesap Zaten Var....")
+                if len(self.parola) > 4 and len(self.parola) < 20 or len(self.parola) == 20:
+
+                    if self.kullanici_adi.count(":") == 0 and self.kullanici_adi.count(".") == 0 and self.kullanici_adi.count(",") == 0 and self.kullanici_adi.count(";") == 0 and self.kullanici_adi.count("*") == 0 and self.kullanici_adi.count("|") == 0 and self.kullanici_adi.count("\\") == 0 and self.kullanici_adi.count("}") == 0 and self.kullanici_adi.count("]") == 0 and self.kullanici_adi.count("[") == 0 and self.kullanici_adi.count("{") == 0 and self.kullanici_adi.count("½") == 0 and self.kullanici_adi.count("$") == 0 and self.kullanici_adi.count("#") == 0 and self.kullanici_adi.count("£") == 0 and self.kullanici_adi.count(">") == 0 and self.kullanici_adi.count("<") == 0 and self.kullanici_adi.count("_") == 0 and self.kullanici_adi.count("?") == 0 and self.kullanici_adi.count("=") == 0 and self.kullanici_adi.count("(") == 0 and self.kullanici_adi.count(")") == 0 and self.kullanici_adi.count("/") == 0 and self.kullanici_adi.count("&") == 0 and self.kullanici_adi.count("%") == 0 and self.kullanici_adi.count("+") == 0 and self.kullanici_adi.count("^") == 0 and self.kullanici_adi.count("'") == 0 and self.kullanici_adi.count("!") == 0 and self.kullanici_adi.count("@") == 0:
+                        
+                        if self.parola.count(" ") == 0 and self.parola.count("	 ") == 0:
+                            self.olusturma_tarihi = datetime.datetime.now()
+                            self.gercek_olusturma_tarihi = str(f"{self.olusturma_tarihi.year}/{self.olusturma_tarihi.month}/{self.olusturma_tarihi.day}")
+                            self.gercek_olusturma_zamani = str(f"{self.olusturma_tarihi.hour}:{self.olusturma_tarihi.minute}:{self.olusturma_tarihi.second}")
+                        
+                            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kullanici_adi , self.parola ) )
+                            self.conn.commit()
+                            self.hepsi = self.cursor.fetchall()
+                            if self.hepsi == []:
+                                self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE transfer_kodu = ?" , ( self.transfer_kodu, ) )
+                                self.kod = self.cursor.fetchall()
+                                if self.kod == []:
+                                    self.giris_yapilmak = datetime.datetime.now()
+                                    self.giris_yapilma_zamani = str(f"Tarih: {self.giris_yapilmak.year}/{self.giris_yapilmak.month}/{self.giris_yapilmak.day}   Saat: {self.giris_yapilmak.hour}:{self.giris_yapilmak.minute}:{self.giris_yapilmak.second}")
+                                    self.cursor.execute("""INSERT INTO VERİLER(isim, parola, para, hakkimda, transfer_kodu, yardim, tarih, saat, giris_yapilma, transfer_yapilma_sayisi, transfer_yapma_sayisi) VALUES(?,?,?,?,?,?,?,?,?,?,?)""" , ( self.kullanici_adi, self.parola, 0, "", self.transfer_kodu,0, self.gercek_olusturma_tarihi, self.gercek_olusturma_zamani,  self.giris_yapilma_zamani, 0, 0 ) )
+                                    self.conn.commit()
+                                    self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kullanici_adi , self.parola ) )
+                                    self.conn.commit()
+                                    self.hepsi = self.cursor.fetchall()
+                                    self.cursor.execute("UPDATE NOW SET no = ? WHERE rowid = 1" , ( self.hepsi[0][-1], ) )
+                                    self.conn.commit()
+                                    QMessageBox.information(self,"Başarılı","Hesap Başarıyla Oluşturuldu")
+                                    self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.hepsi[0][0]}")
+                                    self.kulanici_girisi.close()
+                                    self.ana_manu.show()
+                                if self.kod != []:
+                                    while True:
+                                        if self.kod == []:
+                                            
+                                            self.giris_yapilmak = datetime.datetime.now()
+                                            self.giris_yapilma_zamani = str(f"Tarih: {self.giris_yapilmak.year}/{self.giris_yapilmak.month}/{self.giris_yapilmak.day}   Saat: {self.giris_yapilmak.hour}:{self.giris_yapilmak.minute}:{self.giris_yapilmak.second}")
+                                            self.cursor.execute("""INSERT INTO VERİLER(isim, parola, para, hakkimda, transfer_kodu, yardim, tarih, saat, giris_yapilma, transfer_yapilma_sayisi, transfer_yapma_sayisi) VALUES(?,?,?,?,?,?,?,?,?,?,?)""" , ( self.kullanici_adi, self.parola, 0, "", self.transfer_kodu,0, self.gercek_olusturma_tarihi, self.gercek_olusturma_zamani,  self.giris_yapilma_zamani, 0, 0 ) )
+                                            self.conn.commit()
+                                            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kullanici_adi , self.parola ) )
+                                            self.conn.commit()
+                                            self.hepsi = self.cursor.fetchall()
+                                            self.cursor.execute("UPDATE NOW SET no = ? WHERE rowid = 1" , ( self.hepsi[0][-1], ) )
+                                            self.conn.commit()
+                                            QMessageBox.information(self,"Başarılı","Hesap Başarıyla Oluşturuldu")
+                                            self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.hepsi[0][0]}")
+                                            self.kulanici_girisi.close()
+                                            self.ana_manu.show()
+                                            break
+                                        self.transfer_kodu = randint(100,9)
+                                        self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE transfer_kodu = ?" , ( self.transfer_kodu, ) )
+                                        self.kod = self.cursor.fetchall()
+                            elif self.hepsi != []:
+                                QMessageBox.critical(self,"Hata","Böyle bir Hesap Zaten Var....")
+                        else:
+                            QMessageBox.critical(self,"Hata","Parolanızda Boşluk Kullanamassınız !!!")
                     else:
-                        QMessageBox.critical(self,"Hata","Parolanızda Boşluk Kullanamassınız !!!")
-                else:
-                    QMessageBox.critical(self,"Hata","Kullanıcı Adınızda Sadece Harf ve sayı Kullanabilirsiniz")
+                        QMessageBox.critical(self,"Hata","Kullanıcı Adınızda Sadece Harf ve sayı Kullanabilirsiniz")
 
-            elif len(self.parola) < 4 or len(self.parola) > 20 or len(self.parola) != 20:
-                QMessageBox.critical(self,"Hata","Yeni Parolanız 5 ile 20 Karakterleri Arasında Olmalıdır !!!")
-        elif len(self.kullanici_adi) > 18 or len(self.kullanici_adi) < 3 or len(self.kullanici_adi) != 17:
-            QMessageBox.critical(self,"Hata","Kullanıcı Adınız 4 ile 17 Karakterleri Arasında Olmalıdır !!!")
+                elif len(self.parola) < 4 or len(self.parola) > 20 or len(self.parola) != 20:
+                    QMessageBox.critical(self,"Hata","Yeni Parolanız 5 ile 20 Karakterleri Arasında Olmalıdır !!!")
+            elif len(self.kullanici_adi) > 18 or len(self.kullanici_adi) < 3 or len(self.kullanici_adi) != 17:
+                QMessageBox.critical(self,"Hata","Kullanıcı Adınız 4 ile 17 Karakterleri Arasında Olmalıdır !!!")
 
     def bakiye(self):
         try:
@@ -1755,3 +1777,5 @@ Daha Fazlası İçin https://youtube.com/@pewdiepie adresine gidebilirsiniz : )
 app = QApplication([])
 mainwindow = MainWindow()
 app.exec_()
+
+
