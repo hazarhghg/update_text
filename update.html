@@ -1324,18 +1324,15 @@ class MainWindow(QMainWindow):
             # Durum kodunu kontrol et
             if response.status_code == 200:
                 # Başarılıysa, içeriği bir değişkene atayın
-                html_icerik = response.text
-                print("HTML içeriği başarıyla alındı.")
+                html_icerik = response.text.replace("\n","")
                 
-                with open("ATM Programı Güncel Sürüm.py","w",encoding="utf-8") as file:
+                with open(f"{__file__}","w",encoding="utf-8") as file:
                     file.write(html_icerik)
-                    self.mesaj = QMessageBox.information(self,"Başarılı","Yeni Sürüm Başarıyla yüklendi Yeni Sürümü Açmak İstermisiniz ?"
-                                                         ,QMessageBox.Yes | QMessageBox.No |
+                    self.mesaj = QMessageBox.information(self,"Başarılı","Yeni Sürüm Başarıyla yüklendi",
+                                                         QMessageBox.Yes |
                                                          QMessageBox.Cancel)
-                    if self.mesaj == QMessageBox.Yes:
-                        startfile("ATM Programı Güncel Sürüm.py")
-                        exit()
-                    else: ...
+                    startfile(f"{__file__}")
+                    exit()
             else:
                 print(f"Sayfa yüklenemedi. Hata kodu: {response.status_code}")
 
@@ -1758,5 +1755,3 @@ Daha Fazlası İçin https://youtube.com/@pewdiepie adresine gidebilirsiniz : )
 app = QApplication([])
 mainwindow = MainWindow()
 app.exec_()
-
-
