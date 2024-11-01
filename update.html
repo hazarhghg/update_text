@@ -1,4 +1,3 @@
-
 from random import randint
 from sqlite3 import DatabaseError, connect
 import datetime
@@ -234,9 +233,6 @@ class Hakkimdak(QMainWindow):
 
         self.hakkimda_terminali = Hakkimda()
         self.hakkimda_terminali.setupUi(self)
-
-
-
 class Ui_MainWindow7(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -307,7 +303,6 @@ class Ui_MainWindow7(object):
         self.parolayi_degistirme_butonu.setText(_translate("MainWindow", "Parola Değiştirmeyi Onayla"))
         self.yeni_parola_bilgi.setText(_translate("MainWindow", "Lütfen Yeni Parolanızı Giriniz:"))
         self.ana_menuye_donme_butoni.setText(_translate("MainWindow", "Ana Menüye Dön"))
-
 class parola_degistirim(QMainWindow):
 
     def __init__(self):
@@ -320,9 +315,6 @@ class parola_degistirim(QMainWindow):
         self.parola_onayla.yeni_parola_alani.setPlaceholderText("Yeni Parola")
         self.parola_onayla.parola_onaylama_alani.setPlaceholderText("Yeni Parolayı Onayla")
         self.parola_onayla.lineEdit.setPlaceholderText("Eski Parola")
-
-
-
 class Ui_MainWindow6(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -383,8 +375,6 @@ class Ui_MainWindow6(object):
         self.Ana_Menuye_donme_butoni.setText(_translate("MainWindow", "Ana Menüye Dön"))
         self.kullanici_adi_bilgi.setText(_translate("MainWindow", "Lütfen Yeni Kullanıcı Adınızı Giriniz:"))
         self.eski_kullanici_adi_bilgi.setText(_translate("MainWindow", "Lütfen Eski Kullanıcı Adınızı Giriniz"))
-
-
 class kullanici_adi_degistir(QMainWindow):
 
     def __init__(self):
@@ -395,9 +385,6 @@ class kullanici_adi_degistir(QMainWindow):
         self.kullanici_adini_onaylama.setupUi(self)
         self.kullanici_adini_onaylama.eski_kullanici_adi_alani.setPlaceholderText("Eski Kullanıcı Adı")
         self.kullanici_adini_onaylama.yeni_kullanici_adi_alani.setPlaceholderText("Yeni Kullanıcı Adı")
-
-
-
 class cek(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -445,8 +432,6 @@ class cek(object):
         self.lineEdit_para_cekme_alani.setPlaceholderText(_translate("MainWindow", "çekilecek tutar"))
         self.pushButton_geri_don.setText(_translate("MainWindow", "Ana Sayfaya Dön"))
         self.pushButton_cek.setText(_translate("MainWindow", "Tutarı Hesaptan Çek"))
-
-
 class Para_cekme_terminali(QMainWindow):
 
     def __init__(self):
@@ -454,8 +439,6 @@ class Para_cekme_terminali(QMainWindow):
         super().__init__()
         self.cek_terminali = cek()
         self.cek_terminali.setupUi(self)
-
-
 class Ui_label_hesabin_olusturma_tarihi(object):
     def setupUi(self, label_hesabin_olusturma_tarihi):
         label_hesabin_olusturma_tarihi.setObjectName("label_hesabin_olusturma_tarihi")
@@ -583,9 +566,6 @@ class Ui_label_hesabin_olusturma_tarihi(object):
         self.label_detayli_bilgi_9.setText(_translate("label_hesabin_olusturma_tarihi", "NOT: Bu Bilgileri Buradan Değiştiremessiniz !!!"))
         self.pushButton_ana_menuye_don.setText(_translate("label_hesabin_olusturma_tarihi", "Ana Menüye Dön"))
         self.pushButton_ana_menuye_don.setShortcut(_translate("label_hesabin_olusturma_tarihi", "Ctrl+B"))
-
-
-
 class detayli_bilgi_ac(QMainWindow):
 
     def __init__(self):
@@ -593,8 +573,6 @@ class detayli_bilgi_ac(QMainWindow):
         super().__init__()
         self.detayli_bilgi = Ui_label_hesabin_olusturma_tarihi()
         self.detayli_bilgi.setupUi(self)
-
-
 class Ui_MainWindow3(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -642,7 +620,6 @@ class Ui_MainWindow3(object):
         self.lineEdit_para_yatirma_alani.setPlaceholderText(_translate("MainWindow", "yatırılacak tutar"))
         self.pushButton_come_back.setText(_translate("MainWindow", "Ana Sayfaya Dön"))
         self.pushButton_yatir.setText(_translate("MainWindow", "Tutarı Hesaba Yatır"))
-
 class Para_yetirma_terminali(QMainWindow):
 
     def __init__(self):
@@ -650,7 +627,6 @@ class Para_yetirma_terminali(QMainWindow):
         super().__init__()
         self.yatir_terminal = Ui_MainWindow3()
         self.yatir_terminal.setupUi(self)
-
 class Ui_MainWindow2(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -766,7 +742,6 @@ class Ui_MainWindow2(object):
         self.pushButton_gonderiler.setText(_translate("MainWindow", "🧭Güncelleme Notları🧭"))
         self.pushButton_detayli_bilgi.setText(_translate("MainWindow", "⚔ Hesap Hakkında Detaylı Bilgi ⚔"))
         self.pushButton_gonderi_ayarlari.setText(_translate("MainWindow", "📋Projenin Geliştiricisi📋"))
-
 class Ana_manu(QMainWindow):
 
     def __init__(self):
@@ -774,8 +749,6 @@ class Ana_manu(QMainWindow):
         super().__init__()
         self.menu = Ui_MainWindow2()
         self.menu.setupUi(self)
-
-
 class Ui_MainWindow1(object):
         def setupUi(self, MainWindow):
             MainWindow.setObjectName("MainWindow")
@@ -933,9 +906,6 @@ class Ui_MainWindow1(object):
             self.pushButton_giris_yap.setText(_translate("MainWindow", "Giriş Yap"))
             self.pushButton_kaydol.setText(_translate("MainWindow", "Hesap Oluştur"))
             self.pushButton_kaydol_2.setText(_translate("MainWindow", "En Güncel Sürümü Yükle\n\n(bu şu anda eski bir sürümde olduğunuzu göstermez)"))
-
-
-
 class Kullanici_girisi(QMainWindow):
 
     def __init__(self):
@@ -944,13 +914,14 @@ class Kullanici_girisi(QMainWindow):
         self.giris = Ui_MainWindow1()
         self.giris.setupUi(self)
 
+
+
 class MainWindow(QMainWindow):
 
     def __init__(self):
 
         super().__init__()
         self.maincode()
-
     def maincode(self):
         self.kulanici_girisi = Kullanici_girisi()
         self.ana_manu = Ana_manu()
@@ -1012,73 +983,14 @@ class MainWindow(QMainWindow):
 
         try:
             
-            self.cursor.execute("""CREATE TABLE IF NOT EXISTS GÖNDERİLENLER(
-                            yazi TEXT,
-                            gonderen TEXT,
-                            gonderilme_tarihi TEXT,
-                            begeni INT,
-                            dislike INT,
-                            no INT
-                            )
-                            """)
-            self.cursor.execute("""CREATE TABLE IF NOT EXISTS VERİLER(
-                                isim TEXT,
-                                parola TEXT,
-                                para INT,
-                                hakkimda TEXT,
-                                transfer_kodu TEXT,
-                                yardim INT,
-                                tarih TEXT,
-                                saat TEXT,
-                                giris_yapilma TEXT,
-                                transfer_yapilma_sayisi TEXT,
-                                transfer_yapma_sayisi TEXT
-                                )""")
-            
-            self.cursor.execute("""CREATE TABLE IF NOT EXISTS CEZALAR(
-                                can INT,
-                                ceza INT,
-                                yanma INT)""")
-            
-            self.cursor.execute("""CREATE TABLE IF NOT EXISTS NOW(
-                                no INT)""")
+            self.tablolari_olustur()
 
-            self.conn.commit()
 
         except DatabaseError:
             with open("DataBase.db","w") as file:
                 file.write("")
-                self.cursor.execute("""CREATE TABLE IF NOT EXISTS GÖNDERİLENLER(
-                                yazi TEXT,
-                                gonderen TEXT,
-                                gonderilme_tarihi TEXT,
-                                begeni INT,
-                                dislike INT,
-                                no INT
-                                )
-                                """)
-                self.cursor.execute("""CREATE TABLE IF NOT EXISTS VERİLER(
-                                isim TEXT,
-                                parola TEXT,
-                                para INT,
-                                hakkimda TEXT,
-                                transfer_kodu TEXT,
-                                yardim INT,
-                                tarih TEXT,
-                                saat TEXT,
-                                giris_yapilma TEXT,
-                                transfer_yapilma_sayisi TEXT,
-                                transfer_yapma_sayisi TEXT
-                                )""")
-            
-            self.cursor.execute("""CREATE TABLE IF NOT EXISTS CEZALAR(
-                                can INT,
-                                ceza INT,
-                                yanma INT)""")
-            
-            self.cursor.execute("""CREATE TABLE IF NOT EXISTS NOW(
-                                no INT)""")
-            self.conn.commit()
+
+                self.tablolari_olustur()
             QMessageBox.information(self,"Hata","Verilerin Tutulduğu Dosyada Hata Görüldüğü İçin Verileri Sıfırlandı.....")
 
         datas2 = [ (4, 60, 0) ]
@@ -1124,6 +1036,42 @@ class MainWindow(QMainWindow):
             self.cursor.execute("UPDATE NOW SET no = 0 WHERE rowid = 1")
             self.conn.commit()
             self.kulanici_girisi.show()
+
+        
+
+    def tablolari_olustur(self):
+            self.cursor.execute("""CREATE TABLE IF NOT EXISTS GÖNDERİLENLER(
+                                yazi TEXT,
+                                gonderen TEXT,
+                                gonderilme_tarihi TEXT,
+                                begeni INT,
+                                dislike INT,
+                                no INT
+                                )
+                                """)
+            self.cursor.execute("""CREATE TABLE IF NOT EXISTS VERİLER(
+                                isim TEXT,
+                                parola TEXT,
+                                para INT,
+                                hakkimda TEXT,
+                                transfer_kodu TEXT,
+                                yardim INT,
+                                tarih TEXT,
+                                saat TEXT,
+                                giris_yapilma TEXT,
+                                transfer_yapilma_sayisi TEXT,
+                                transfer_yapma_sayisi TEXT
+                                )""")
+            
+            self.cursor.execute("""CREATE TABLE IF NOT EXISTS CEZALAR(
+                                can INT,
+                                ceza INT,
+                                yanma INT)""")
+            
+            self.cursor.execute("""CREATE TABLE IF NOT EXISTS NOW(no INT)""")
+            self.conn.commit()
+        
+
     def giris_yap(self):
         self.cursor.execute("SELECT * FROM NOW")
         self.now = self.cursor.fetchall()
@@ -1185,12 +1133,6 @@ class MainWindow(QMainWindow):
                         pass
                     elif self.hatamesaji.clickedButton() == self.cancel_button:
                         pass
-
-                
-
-    def transfer_sifre_olusumu(self):
-        pass
-
     def kaydol(self):
         self.cursor.execute("SELECT * FROM NOW")
         self.now = self.cursor.fetchall()
@@ -1209,6 +1151,7 @@ class MainWindow(QMainWindow):
             self.transfer_kodu = randint(100,999999999999999)
             if 1 == 2:
                 pass
+
             elif len(self.kullanici_adi) < 17 and len(self.kullanici_adi) > 3 or len(self.kullanici_adi) == 17:
 
                 if len(self.parola) > 4 and len(self.parola) < 20 or len(self.parola) == 20:
@@ -1220,7 +1163,7 @@ class MainWindow(QMainWindow):
                             self.gercek_olusturma_tarihi = str(f"{self.olusturma_tarihi.year}/{self.olusturma_tarihi.month}/{self.olusturma_tarihi.day}")
                             self.gercek_olusturma_zamani = str(f"{self.olusturma_tarihi.hour}:{self.olusturma_tarihi.minute}:{self.olusturma_tarihi.second}")
                         
-                            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kullanici_adi , self.parola ) )
+                            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ?", ( self.kullanici_adi , ) )
                             self.conn.commit()
                             self.hepsi = self.cursor.fetchall()
                             if self.hepsi == []:
@@ -1231,7 +1174,7 @@ class MainWindow(QMainWindow):
                                     self.giris_yapilma_zamani = str(f"Tarih: {self.giris_yapilmak.year}/{self.giris_yapilmak.month}/{self.giris_yapilmak.day}   Saat: {self.giris_yapilmak.hour}:{self.giris_yapilmak.minute}:{self.giris_yapilmak.second}")
                                     self.cursor.execute("""INSERT INTO VERİLER(isim, parola, para, hakkimda, transfer_kodu, yardim, tarih, saat, giris_yapilma, transfer_yapilma_sayisi, transfer_yapma_sayisi) VALUES(?,?,?,?,?,?,?,?,?,?,?)""" , ( self.kullanici_adi, self.parola, 0, "", self.transfer_kodu,0, self.gercek_olusturma_tarihi, self.gercek_olusturma_zamani,  self.giris_yapilma_zamani, 0, 0 ) )
                                     self.conn.commit()
-                                    self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kullanici_adi , self.parola ) )
+                                    self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ?", ( self.kullanici_adi , ) )
                                     self.conn.commit()
                                     self.hepsi = self.cursor.fetchall()
                                     self.cursor.execute("UPDATE NOW SET no = ? WHERE rowid = 1" , ( self.hepsi[0][-1], ) )
@@ -1272,7 +1215,6 @@ class MainWindow(QMainWindow):
                     QMessageBox.critical(self,"Hata","Yeni Parolanız 5 ile 20 Karakterleri Arasında Olmalıdır !!!")
             elif len(self.kullanici_adi) > 18 or len(self.kullanici_adi) < 3 or len(self.kullanici_adi) != 17:
                 QMessageBox.critical(self,"Hata","Kullanıcı Adınız 4 ile 17 Karakterleri Arasında Olmalıdır !!!")
-
     def bakiye(self):
         try:
             self.cursor.execute("SELECT * FROM NOW")
@@ -1290,7 +1232,6 @@ class MainWindow(QMainWindow):
             self.conn.commit()
             self.ana_manu.close()
             self.kulanici_girisi.show()
-
     def hepsini_sil(self):
         self.parola_degistirem.parola_onayla.parola_onaylama_alani.setText("")
         self.parola_degistirem.parola_onayla.yeni_parola_alani.setText("")
@@ -1304,7 +1245,6 @@ class MainWindow(QMainWindow):
         self.para_gonder.transferler.lineEdit_hesaba_yatirilacak_para.setText("")
         self.para_gonder.transferler.line_edit_parola.setText("")
         self.para_gonder.transferler.lineEdit_Yapilacak_hesabin_transfer_kodi.setText("")
-
     def cikis_yap(self):
         self.hepsini_sil()
 
@@ -1312,24 +1252,18 @@ class MainWindow(QMainWindow):
         self.conn.commit()
         self.ana_manu.close()
         self.kulanici_girisi.show()
-
     def kullanici_adi_degistir(self):
         self.ana_manu.close()
         self.kullanici_degistir.show()
-
     def parola_degistir(self):
         self.ana_manu.close()
         self.parola_degistirem.show()
-
     def para_cek(self):
         self.ana_manu.close()
         self.cekme_terminali.show()
-
     def para_yatir(self):
         self.ana_manu.close()
         self.yatirma_terminali.show()
-
-
     def come_back(self):
         self.yatirma_terminali.close()
         self.ana_manu.show()
@@ -1351,8 +1285,8 @@ class MainWindow(QMainWindow):
                 with open(f"{__file__}","w",encoding="utf-8") as file:
                     file.write(html_icerik)
                     self.mesaj = QMessageBox.information(self,"Başarılı","Yeni Sürüm Başarıyla yüklendi",
-                                                         QMessageBox.Yes |
-                                                         QMessageBox.Cancel)
+                                                        QMessageBox.Yes |
+                                                        QMessageBox.Cancel)
                     startfile(f"{__file__}")
                     exit()
             else:
@@ -1362,12 +1296,11 @@ class MainWindow(QMainWindow):
             QMessageBox.warning(self,"İnternet Yok","İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin.")
         except Exception as e:
             QMessageBox.warning(self,"Hata",f"Hata {e}")
-
     def para_yatirma_onay(self):
         
         try:
             int(self.yatirma_terminali.yatir_terminal.lineEdit_para_yatirma_alani.text())
-           
+        
         except Exception:
             QMessageBox.critical(self,"Hata","Lütfen Sadece Sayı veya Rakam Giriniz")
 
@@ -1398,13 +1331,10 @@ class MainWindow(QMainWindow):
                     QMessageBox.information(self,"Başarılı","Tutar Bakiyeye Başarıyla Yatırıldı : )")
                 else:
                     QMessageBox.critical(self,"Hata","Bu Kadar Büyük Sayılar Giremessiniz !!!")
-                    
-
     def geri_don(self):
 
         self.cekme_terminali.close()
         self.ana_manu.show()
-
     def para_cek_onay(self):
         
         
@@ -1445,7 +1375,6 @@ class MainWindow(QMainWindow):
                 self.conn.commit()
                 self.cekme_terminali.close()
                 self.kulanici_girisi.show()
-
     def kullanici_adi_degistire(self):
         self.cursor.execute("SELECT * FROM NOW")
         self.conn.commit()
@@ -1482,18 +1411,13 @@ class MainWindow(QMainWindow):
                     QMessageBox.critical(self,"Hata","Kullanıcı Adınız 17 ile 3 karakterleri arasında olmalıdır !!!")
             else:
                 QMessageBox.critical(self,"Hata","Kullanıcı Adınızda Özel Harf Kullanamassınız !!!")
-        
-
-
     def ana_menuye_don(self):
         self.kullanici_degistir.close()
         self.ana_manu.show()
-
     def menuye_don(self):
 
         self.parola_degistirem.close()
         self.ana_manu.show()
-
     def parola_degistire(self):
 
         self.eski_parola = self.parola_degistirem.parola_onayla.lineEdit.text()
@@ -1542,7 +1466,6 @@ class MainWindow(QMainWindow):
         self.hesabı_silme_uyarı_mesajı.setStandardButtons(QMessageBox.Yes)
         self.hesabı_silme_uyarı_mesajı.show()
         self.hesabı_silme_uyarı_mesajı.buttonClicked.connect(self.silme_islemi)
-    
     def silme_islemi(self):
         self.cursor.execute("SELECT * FROM NOW")
         self.now = self.cursor.fetchall()
@@ -1555,7 +1478,6 @@ class MainWindow(QMainWindow):
         self.kulanici_girisi.show()
         self.hesabı_silme_uyarı_mesajı.close()
         QMessageBox.information(self,"Başarılı","Hesap Başarıyla SİLİNDİ")
-
     def hakkimda_giris(self):
 
         self.ana_manu.close()
@@ -1574,7 +1496,6 @@ class MainWindow(QMainWindow):
             self.conn.commit()
             self.hakkimda.close()
             self.kulanici_girisi.show()
-
     def hakkimda_dan_ana_menuye_don(self):
         self.text_mesaji = self.hakkimda.hakkimda_terminali.textEdit_hakkimda.toPlainText()
         self.cursor.execute("SELECT * FROM NOW")
@@ -1608,18 +1529,51 @@ class MainWindow(QMainWindow):
     def hakkimda_nedir(self):
 
         QMessageBox.information(self,"Hakkımda Nedir","Hakkımda Hakkınızdaki Bütün Bilgileri Yazabilirsiniz : )")
-
-
     def save_text(self):
-
         self.girilen_yazi = self.hakkimda.hakkimda_terminali.textEdit_hakkimda.toPlainText()
+        self.cursor.execute("SELECT * FROM CEZALAR")
+        self.cezalar = self.cursor.fetchall()
+
+        self.cursor.execute("SELECT * FROM GÖNDERİLENLER")
+        self.gonderilenler = self.cursor.fetchall()
+
         self.cursor.execute("SELECT * FROM NOW")
         self.now = self.cursor.fetchall()
 
+        self.cursor.execute("SELECT rowid,* FROM VERİLER")
+        self.veriler = self.cursor.fetchall()
+        
+        with open("DataBase.db","w",encoding="utf-8") as self.file_reset:
+            pass
+
+        self.conn = connect("DataBase.db")
+        
+        self.cursor = self.conn.cursor()
+        
+        self.tablolari_olustur()
+        self.datas = self.veriler
+        for data in self.datas:
+            if str(data[0]) == str(self.now[0][0]):
+                self.cursor.execute("INSERT INTO VERİLER(isim, parola, para, hakkimda, transfer_kodu, yardim, tarih, saat, giris_yapilma, transfer_yapilma_sayisi, transfer_yapma_sayisi) VALUES(?,?,?,?,?,?,?,?,?,?,?)" , ( data[1], data[2], data[3], str(self.girilen_yazi), data[5], data[6], data[7], data[8], data[9], data[10], data[11] ) )
+                self.conn.commit()
+            if str(data[0]) != str(self.now[0][0]):
+                self.cursor.execute("INSERT INTO VERİLER(isim, parola, para, hakkimda, transfer_kodu, yardim, tarih, saat, giris_yapilma, transfer_yapilma_sayisi, transfer_yapma_sayisi) VALUES(?,?,?,?,?,?,?,?,?,?,?)" , ( data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11] ) )
+                self.conn.commit()
+        self.cursor.execute(f"INSERT INTO NOW(no) VALUES({self.now[0][0]})")
+        self.conn.commit()
+        self.cursor.execute(f"INSERT INTO CEZALAR(can, ceza, yanma) VALUES({self.cezalar[0][0]},{self.cezalar[0][1]},{self.cezalar[0][2]})")
+        self.conn.commit()
+        self.datas2 = self.gonderilenler
+        for data2 in self.datas2:
+            self.cursor.execute("INSERT INTO GÖNDERİLENLER(yazi, gonderen, gonderilme_tarihi, begeni, dislike, no) VALUES(?,?,?,?,?,?)" , ( data2[0], data2[1], data2[2], data2[3], data2[4], data2[5] ) )
+            self.conn.commit()
+
+
+        self.cursor.execute("SELECT * FROM NOW")
+        self.now = self.cursor.fetchall()
         self.cursor.execute("UPDATE VERİLER SET hakkimda = ? WHERE rowid = ?" , ( self.girilen_yazi, self.now[0][0] ) )
         self.conn.commit()
         QMessageBox.information(self,"Başarılı","Değişiklikler Başarıyla Kaydedildi.....")
-
     def yayinla(self):
         self.gonderilecek_yazi = self.hakkimda.hakkimda_terminali.textEdit_hakkimda.toPlainText()
         self.şimdi = datetime.datetime.now()
@@ -1632,7 +1586,6 @@ class MainWindow(QMainWindow):
         self.cursor.execute("INSERT INTO GÖNDERİLENLER(yazi, gonderen, gonderilme_tarihi, begeni, dislike, no) VALUES(?,?,?,?,?,?)" , ( self.gonderilecek_yazi, self.veriler[0][0], self.şimdi_yazisi, 0, 0, self.veriler[0][-1] ) )
         self.conn.commit()
         QMessageBox.information(self,"Başarılı","Yazı Başarıyla Yayınlandı : )")
-
     def gonderiler(self):
 
         with open("Güncelleme Notları.txt","w",encoding="utf-8") as self.update_notes:
@@ -1650,20 +1603,14 @@ Daha Fazlası İçin https://youtube.com/@pewdiepie adresine gidebilirsiniz : )
 
             """)
             startfile("Güncelleme Notları.txt")
-
-        
-
     def gonderi_ayarlari(self):
         QMessageBox.information(self,"Bilgi","Bu Proje Hazar **** tarafından geliştirilmiştir.....")
-
     def geri_donme(self):
         self.transfer.Para_transferi.lineEdit_para_transferi_kodi.setText(f"{self.veriler[0][4]}")
         self.transfer.close()
         self.ana_manu.show()
-
     def bilmiom(self):
         QMessageBox.information(self,"Ne İşe Yarar:","Para Transferini Kullanarak Kendi Hesabınızdan Başkasının Hesabına Para Gönderebiliriz ve Para Transfer Kodu ile Hangi Hesaba Para Göndereceğimizi Seçebiliriz.")
-    
     def para_transferi_kodi_bilgisi(self):
         self.ana_manu.close()
         self.transfer.show()
@@ -1674,17 +1621,14 @@ Daha Fazlası İçin https://youtube.com/@pewdiepie adresine gidebilirsiniz : )
         self.veriler = self.cursor.fetchall()
         self.transfer.Para_transferi.lineEdit_para_transferi_kodi.setText(f"{self.veriler[0][4]}")
         self.transfer.Para_transferi.lineEdit_para_transferi_kodi.setPlaceholderText(f"{self.veriler[0][4]}")
-
     def para_transferi(self):
 
         self.ana_manu.close()
         self.para_gonder.show()
-    
     def ama_menuye_don(self):
 
         self.para_gonder.close()
         self.ana_manu.show()
-
     def parayi_gonder(self):
         try:
 
@@ -1739,11 +1683,9 @@ Daha Fazlası İçin https://youtube.com/@pewdiepie adresine gidebilirsiniz : )
                                 QMessageBox.critical(self,"Hata", f"Hesabınızda {self.yatirilacak_para}$ Bulunmuyor !!!")
                     except Exception:
                         QMessageBox.critical(self,"Hata","Hesap Bulunamadı")
-
     def ana_menuye_donem(self):
         self.detayli_bilgi.close()
         self.ana_manu.show()
-
     def detayli_bilgiye_gir(self):
 
         self.ana_manu.close()
@@ -1771,11 +1713,6 @@ Daha Fazlası İçin https://youtube.com/@pewdiepie adresine gidebilirsiniz : )
         self.detayli_bilgi.detayli_bilgi.lineEdit_hesaba_yapilan_transfer_sayisi.setPlaceholderText(f"{self.veriler[0][9]}")
         self.detayli_bilgi.detayli_bilgi.lineEdit_hesabin_transfer_yapma_sayisi.setPlaceholderText(f"{self.veriler[0][10]}")
 
-
-
-
 app = QApplication([])
 mainwindow = MainWindow()
 app.exec_()
-
-
