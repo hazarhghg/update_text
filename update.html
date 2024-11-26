@@ -1,9 +1,16 @@
+import os
 from random import randint
 from sqlite3 import DatabaseError, connect
 import datetime
-from os import startfile
+from os import startfile, system
 from PyQt5.QtWidgets import QMessageBox, QMainWindow, QApplication
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtCore import Qt
+
+system("@echo off")
+system("color f")
 class Transfer(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -492,27 +499,35 @@ class Ui_label_hesabin_olusturma_tarihi(object):
         self.label_detayli_bilgi_7.setFont(font)
         self.label_detayli_bilgi_7.setObjectName("label_detayli_bilgi_7")
         self.lineEdit_kullanici_adi = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_kullanici_adi.setReadOnly(True)
         self.lineEdit_kullanici_adi.setGeometry(QtCore.QRect(180, 100, 441, 20))
         self.lineEdit_kullanici_adi.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.lineEdit_kullanici_adi.setObjectName("lineEdit_kullanici_adi")
         self.lineEdit_hesabin_olusturulma_tarihi = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_hesabin_olusturulma_tarihi.setReadOnly(True)
         self.lineEdit_hesabin_olusturulma_tarihi.setGeometry(QtCore.QRect(230, 300, 391, 20))
         self.lineEdit_hesabin_olusturulma_tarihi.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.lineEdit_hesabin_olusturulma_tarihi.setObjectName("lineEdit_hesabin_olusturulma_tarihi")
         self.lineEdit_toplam_bakiye = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_toplam_bakiye.setReadOnly(True)
         self.lineEdit_toplam_bakiye.setGeometry(QtCore.QRect(250, 180, 371, 20))
         self.lineEdit_toplam_bakiye.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.lineEdit_toplam_bakiye.setObjectName("lineEdit_toplam_bakiye")
+        self.lineEdit_toplam_bakiye.setReadOnly(True)
         self.lineEdit_hesabin_transfer_yapma_sayisi = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_hesabin_transfer_yapma_sayisi.setReadOnly(True)
         self.lineEdit_hesabin_transfer_yapma_sayisi.setGeometry(QtCore.QRect(310, 220, 311, 20))
         self.lineEdit_hesabin_transfer_yapma_sayisi.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.lineEdit_hesabin_transfer_yapma_sayisi.setObjectName("lineEdit_hesabin_transfer_yapma_sayisi")
+        self.lineEdit_hesabin_transfer_yapma_sayisi.setReadOnly(True)
         self.lineEdit_hesaba_yapilan_transfer_sayisi = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_hesaba_yapilan_transfer_sayisi.setReadOnly(True)
         self.lineEdit_hesaba_yapilan_transfer_sayisi.setGeometry(QtCore.QRect(270, 260, 351, 20))
         self.lineEdit_hesaba_yapilan_transfer_sayisi.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.lineEdit_hesaba_yapilan_transfer_sayisi.setText("")
         self.lineEdit_hesaba_yapilan_transfer_sayisi.setObjectName("lineEdit_hesaba_yapilan_transfer_sayisi")
         self.lineEdit_hesabin_transfer_kodi = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_hesabin_transfer_kodi.setReadOnly(True)
         self.lineEdit_hesabin_transfer_kodi.setGeometry(QtCore.QRect(200, 140, 421, 20))
         self.lineEdit_hesabin_transfer_kodi.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.lineEdit_hesabin_transfer_kodi.setText("")
@@ -524,6 +539,7 @@ class Ui_label_hesabin_olusturma_tarihi(object):
         self.label_detayli_bilgi_8.setFont(font)
         self.label_detayli_bilgi_8.setObjectName("label_detayli_bilgi_8")
         self.lineEdit_hesaba_giris_yapilma_tarihi = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_hesaba_giris_yapilma_tarihi.setReadOnly(True)
         self.lineEdit_hesaba_giris_yapilma_tarihi.setGeometry(QtCore.QRect(230, 340, 391, 20))
         self.lineEdit_hesaba_giris_yapilma_tarihi.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.lineEdit_hesaba_giris_yapilma_tarihi.setObjectName("lineEdit_hesaba_giris_yapilma_tarihi")
@@ -628,6 +644,7 @@ class Para_yetirma_terminali(QMainWindow):
         self.yatir_terminal = Ui_MainWindow3()
         self.yatir_terminal.setupUi(self)
 class Ui_MainWindow2(object):
+    
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(659, 385)
@@ -635,6 +652,42 @@ class Ui_MainWindow2(object):
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
+        self.pushButton_bakiye = QtWidgets.QPushButton(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.pushButton_bakiye.setFont(font)
+        self.pushButton_bakiye.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_bakiye.setObjectName("pushButton_bakiye")
+        self.gridLayout.addWidget(self.pushButton_bakiye, 3, 0, 1, 1)
+        self.pushButton_para_transferi = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_para_transferi.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_para_transferi.setObjectName("pushButton_para_transferi")
+        self.gridLayout.addWidget(self.pushButton_para_transferi, 6, 0, 1, 1)
+        self.pushButton_kullanici_adini_degistir = QtWidgets.QPushButton(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.pushButton_kullanici_adini_degistir.setFont(font)
+        self.pushButton_kullanici_adini_degistir.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_kullanici_adini_degistir.setObjectName("pushButton_kullanici_adini_degistir")
+        self.gridLayout.addWidget(self.pushButton_kullanici_adini_degistir, 5, 0, 1, 1)
+        self.label_hos_geldiniz = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.label_hos_geldiniz.setFont(font)
+        self.label_hos_geldiniz.setObjectName("label_hos_geldiniz")
+        self.gridLayout.addWidget(self.label_hos_geldiniz, 0, 0, 1, 1)
+        self.pushButton_fotograf_ekle = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_fotograf_ekle.setStyleSheet("")
+        self.pushButton_fotograf_ekle.setObjectName("pushButton_fotograf_ekle")
+        self.gridLayout.addWidget(self.pushButton_fotograf_ekle, 1, 0, 1, 1)
+        self.pushButton_detayli_bilgi = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_detayli_bilgi.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_detayli_bilgi.setObjectName("pushButton_detayli_bilgi")
+        self.gridLayout.addWidget(self.pushButton_detayli_bilgi, 1, 1, 1, 1)
+        self.pushButton_hakkimda = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_hakkimda.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_hakkimda.setObjectName("pushButton_hakkimda")
+        self.gridLayout.addWidget(self.pushButton_hakkimda, 1, 2, 1, 1)
         self.pushButton_para_cek = QtWidgets.QPushButton(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -642,76 +695,44 @@ class Ui_MainWindow2(object):
         self.pushButton_para_cek.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_para_cek.setObjectName("pushButton_para_cek")
         self.gridLayout.addWidget(self.pushButton_para_cek, 3, 1, 1, 1)
-        self.pushButton_parola_degistir = QtWidgets.QPushButton(self.centralwidget)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.pushButton_parola_degistir.setFont(font)
-        self.pushButton_parola_degistir.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_parola_degistir.setObjectName("pushButton_parola_degistir")
-        self.gridLayout.addWidget(self.pushButton_parola_degistir, 4, 1, 1, 1)
         self.pushButton_para_yatir = QtWidgets.QPushButton(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.pushButton_para_yatir.setFont(font)
         self.pushButton_para_yatir.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_para_yatir.setObjectName("pushButton_para_yatir")
-        self.gridLayout.addWidget(self.pushButton_para_yatir, 3, 0, 1, 1)
-        self.pushButton_kullanici_adini_degistir = QtWidgets.QPushButton(self.centralwidget)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.pushButton_kullanici_adini_degistir.setFont(font)
-        self.pushButton_kullanici_adini_degistir.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_kullanici_adini_degistir.setObjectName("pushButton_kullanici_adini_degistir")
-        self.gridLayout.addWidget(self.pushButton_kullanici_adini_degistir, 4, 0, 1, 1)
-        self.pushButton_bakiye = QtWidgets.QPushButton(self.centralwidget)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.pushButton_bakiye.setFont(font)
-        self.pushButton_bakiye.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_bakiye.setObjectName("pushButton_bakiye")
-        self.gridLayout.addWidget(self.pushButton_bakiye, 2, 0, 1, 1)
-        self.pushButton_hakkimda = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_hakkimda.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_hakkimda.setObjectName("pushButton_hakkimda")
-        self.gridLayout.addWidget(self.pushButton_hakkimda, 2, 1, 1, 1)
-        self.pushButton_para_transferi = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_para_transferi.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_para_transferi.setObjectName("pushButton_para_transferi")
-        self.gridLayout.addWidget(self.pushButton_para_transferi, 5, 0, 1, 1)
-        self.pushButton_para_transferi_kodum = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_para_transferi_kodum.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_para_transferi_kodum.setObjectName("pushButton_para_transferi_kodum")
-        self.gridLayout.addWidget(self.pushButton_para_transferi_kodum, 5, 1, 1, 1)
-        self.label_hos_geldiniz = QtWidgets.QLabel(self.centralwidget)
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.label_hos_geldiniz.setFont(font)
-        self.label_hos_geldiniz.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.label_hos_geldiniz.setObjectName("label_hos_geldiniz")
-        self.gridLayout.addWidget(self.label_hos_geldiniz, 0, 0, 1, 2)
-        self.pushButton_hesabi_sil = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_hesabi_sil.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_hesabi_sil.setObjectName("pushButton_hesabi_sil")
-        self.gridLayout.addWidget(self.pushButton_hesabi_sil, 6, 1, 1, 1)
+        self.gridLayout.addWidget(self.pushButton_para_yatir, 3, 2, 1, 1)
         self.pushButton_cikis_yap = QtWidgets.QPushButton(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.pushButton_cikis_yap.setFont(font)
         self.pushButton_cikis_yap.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_cikis_yap.setObjectName("pushButton_cikis_yap")
-        self.gridLayout.addWidget(self.pushButton_cikis_yap, 6, 0, 1, 1)
-        self.pushButton_gonderiler = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_gonderiler.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_gonderiler.setObjectName("pushButton_gonderiler")
-        self.gridLayout.addWidget(self.pushButton_gonderiler, 8, 0, 1, 1)
-        self.pushButton_detayli_bilgi = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_detayli_bilgi.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_detayli_bilgi.setObjectName("pushButton_detayli_bilgi")
-        self.gridLayout.addWidget(self.pushButton_detayli_bilgi, 7, 0, 1, 2)
-        self.pushButton_gonderi_ayarlari = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_gonderi_ayarlari.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_gonderi_ayarlari.setObjectName("pushButton_gonderi_ayarlari")
-        self.gridLayout.addWidget(self.pushButton_gonderi_ayarlari, 8, 1, 1, 1)
+        self.gridLayout.addWidget(self.pushButton_cikis_yap, 6, 2, 1, 1)
+        self.pushButton_para_transferi_kodum = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_para_transferi_kodum.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_para_transferi_kodum.setObjectName("pushButton_para_transferi_kodum")
+        self.gridLayout.addWidget(self.pushButton_para_transferi_kodum, 5, 2, 1, 1)
+        self.pushButton_hesabi_sil = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_hesabi_sil.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_hesabi_sil.setObjectName("pushButton_hesabi_sil")
+        self.gridLayout.addWidget(self.pushButton_hesabi_sil, 6, 1, 1, 1)
+        self.pushButton_parola_degistir = QtWidgets.QPushButton(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.pushButton_parola_degistir.setFont(font)
+        self.pushButton_parola_degistir.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_parola_degistir.setObjectName("pushButton_parola_degistir")
+        self.gridLayout.addWidget(self.pushButton_parola_degistir, 5, 1, 1, 1)
+        self.kullanici_fotografi = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.kullanici_fotografi.setFont(font)
+        self.kullanici_fotografi.setStyleSheet("border: 4px solid black; /* Daha kalın kenar */")
+        self.kullanici_fotografi.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.kullanici_fotografi.setText("")
+        self.kullanici_fotografi.setObjectName("kullanici_fotografi")
+        self.gridLayout.addWidget(self.kullanici_fotografi, 0, 2, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 659, 21))
@@ -720,28 +741,30 @@ class Ui_MainWindow2(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-        self.label_hos_geldiniz.setBuddy(self.pushButton_parola_degistir)
+        self.kullanici_fotografi.setBuddy(self.pushButton_parola_degistir)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton_para_cek.setText(_translate("MainWindow", "💸Para Çek💸"))
-        self.pushButton_parola_degistir.setText(_translate("MainWindow", "🔒Parolayı Değiştir🔒"))
-        self.pushButton_para_yatir.setText(_translate("MainWindow", "💰Para Yatır💰"))
-        self.pushButton_kullanici_adini_degistir.setText(_translate("MainWindow", "🔑Kullanıcı Adını Değiştir🔑"))
         self.pushButton_bakiye.setText(_translate("MainWindow", "❓Bakiye Sorgula❓"))
-        self.pushButton_hakkimda.setText(_translate("MainWindow", "👑Hakkımda👑"))
         self.pushButton_para_transferi.setText(_translate("MainWindow", "🔌Para Transferi🔌"))
-        self.pushButton_para_transferi_kodum.setText(_translate("MainWindow", "💾Para Transferi Kodum💾"))
+        self.pushButton_kullanici_adini_degistir.setText(_translate("MainWindow", "🔑Kullanıcı Adını Değiştir🔑"))
         self.label_hos_geldiniz.setText(_translate("MainWindow", "Hoş Geldiniz"))
-        self.pushButton_hesabi_sil.setText(_translate("MainWindow", "🧨Hesabı Sil🧨"))
-        self.pushButton_cikis_yap.setText(_translate("MainWindow", "☇Hesaptan Çıkış Yap☇"))
-        self.pushButton_gonderiler.setText(_translate("MainWindow", "🧭Güncelleme Notları🧭"))
+        self.pushButton_fotograf_ekle.setText(_translate("MainWindow", "📷Fotoğraf ekle📷"))
         self.pushButton_detayli_bilgi.setText(_translate("MainWindow", "⚔ Hesap Hakkında Detaylı Bilgi ⚔"))
-        self.pushButton_gonderi_ayarlari.setText(_translate("MainWindow", "📋Projenin Geliştiricisi📋"))
+        self.pushButton_hakkimda.setText(_translate("MainWindow", "👑Hakkımda👑"))
+        self.pushButton_para_cek.setText(_translate("MainWindow", "💸Para Çek💸"))
+        self.pushButton_para_yatir.setText(_translate("MainWindow", "💰Para Yatır💰"))
+        self.pushButton_cikis_yap.setText(_translate("MainWindow", "☇Hesaptan Çıkış Yap☇"))
+        self.pushButton_para_transferi_kodum.setText(_translate("MainWindow", "💾Para Transferi Kodum💾"))
+        self.pushButton_hesabi_sil.setText(_translate("MainWindow", "🧨Hesabı Sil🧨"))
+        self.pushButton_parola_degistir.setText(_translate("MainWindow", "🔒Parolayı Değiştir🔒"))
+
+
 class Ana_manu(QMainWindow):
 
     def __init__(self):
@@ -913,9 +936,6 @@ class Kullanici_girisi(QMainWindow):
         super().__init__()
         self.giris = Ui_MainWindow1()
         self.giris.setupUi(self)
-
-
-
 class MainWindow(QMainWindow):
 
     def __init__(self):
@@ -923,6 +943,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.maincode()
     def maincode(self):
+
         self.kulanici_girisi = Kullanici_girisi()
         self.ana_manu = Ana_manu()
         self.yatirma_terminali = Para_yetirma_terminali()
@@ -966,8 +987,7 @@ class MainWindow(QMainWindow):
         self.para_gonder.transferler.pushButton_parayi_gonder.clicked.connect(self.parayi_gonder)
         self.detayli_bilgi.detayli_bilgi.pushButton_ana_menuye_don.clicked.connect(self.ana_menuye_donem)
         self.ana_manu.menu.pushButton_detayli_bilgi.clicked.connect(self.detayli_bilgiye_gir)
-        self.ana_manu.menu.pushButton_gonderiler.clicked.connect(self.gonderiler)
-        self.ana_manu.menu.pushButton_gonderi_ayarlari.clicked.connect(self.gonderi_ayarlari)
+        self.ana_manu.menu.pushButton_fotograf_ekle.clicked.connect(self.fotograf_degistir)
 
         self.hakkimda.hakkimda_terminali.pushButton_kaydet.setShortcut("CTRL+S")
         self.kulanici_girisi.giris.pushButton_giris_yap.setShortcut("RETURN")
@@ -978,6 +998,7 @@ class MainWindow(QMainWindow):
         self.parola_degistirem.parola_onayla.parolayi_degistirme_butonu.setShortcut("RETURN")
         self.kullanici_degistir.kullanici_adini_onaylama.kullanici_adini_degistirme_butonu.setShortcut("RETURN")
         self.detayli_bilgi.detayli_bilgi.pushButton_ana_menuye_don.setShortcut("RETURN")
+        self.ana_manu.menu.pushButton_bakiye.setShortcut("RETURN")
         self.conn = connect("DataBase.db")
         self.cursor = self.conn.cursor()
 
@@ -1028,6 +1049,14 @@ class MainWindow(QMainWindow):
                 self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE rowid = ?" , ( asd[0][0], ) )
                 self.abi = self.cursor.fetchall()
                 self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.abi[0][0]}")
+                if self.abi[0][11] != "default":
+                    self.pixmap = QPixmap(f"users_photos\\{self.abi[0][12]}{self.abi[0][13]}")
+                    self.ana_manu.menu.kullanici_fotografi.setScaledContents(True)
+                    self.ana_manu.menu.kullanici_fotografi.setPixmap(self.pixmap)
+                else:
+                    self.pixmap = QPixmap("default.png")
+                    self.ana_manu.menu.kullanici_fotografi.setScaledContents(True)
+                    self.ana_manu.menu.kullanici_fotografi.setPixmap(self.pixmap)
             else:
                 self.cursor.execute("UPDATE NOW SET no = 0 WHERE rowid = 1")
                 self.conn.commit()
@@ -1038,7 +1067,6 @@ class MainWindow(QMainWindow):
             self.kulanici_girisi.show()
 
         
-
     def tablolari_olustur(self):
             self.cursor.execute("""CREATE TABLE IF NOT EXISTS GÖNDERİLENLER(
                                 yazi TEXT,
@@ -1060,7 +1088,10 @@ class MainWindow(QMainWindow):
                                 saat TEXT,
                                 giris_yapilma TEXT,
                                 transfer_yapilma_sayisi TEXT,
-                                transfer_yapma_sayisi TEXT
+                                transfer_yapma_sayisi TEXT,
+                                photo_id TEXT,
+                                photo_code TEXT,
+                                uzanti TEXT
                                 )""")
             
             self.cursor.execute("""CREATE TABLE IF NOT EXISTS CEZALAR(
@@ -1070,7 +1101,19 @@ class MainWindow(QMainWindow):
             
             self.cursor.execute("""CREATE TABLE IF NOT EXISTS NOW(no INT)""")
             self.conn.commit()
-        
+    
+    def random_code(self):
+        import random
+
+        # Kullanıcı tarafından belirlenen harf kümesi
+        harfler = "qwrtyuopasdfghjklizxcvbnm1234567890"  # Buraya istediğiniz harfleri yazabilirsiniz.
+
+        # Rasgele bir kod oluşturun (örneğin, 8 karakter uzunluğunda)
+        kod_uzunluğu = 20
+        rasgele_kod = ''.join(random.choice(harfler) for _ in range(kod_uzunluğu))
+
+        return rasgele_kod
+
 
     def giris_yap(self):
         self.cursor.execute("SELECT * FROM NOW")
@@ -1082,15 +1125,26 @@ class MainWindow(QMainWindow):
             self.kulanici_girisi.close()
             self.ana_manu.show()
             self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.veriler[0][0]}")
+            if self.veriler[0][11] != "default":
+                self.pixmap = QPixmap(f"users_photos\\{self.veriler[0][12]}{self.veriler[0][13]}")
+                self.ana_manu.menu.kullanici_fotografi.setScaledContents(True)
+                self.ana_manu.menu.kullanici_fotografi.setPixmap(self.pixmap)
+            else:
+                self.pixmap = QPixmap("default.png")
+                self.ana_manu.menu.kullanici_fotografi.setScaledContents(True)
+                self.ana_manu.menu.kullanici_fotografi.setPixmap(self.pixmap)
         else:
                 
-            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kulanici_girisi.giris.lineEdit_kullanici_adi.text() , self.kulanici_girisi.giris.lineEdit_parola.text() ) )
+            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ?", ( self.kulanici_girisi.giris.lineEdit_kullanici_adi.text(), ))
             self.gercek = self.cursor.fetchall()
             self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kulanici_girisi.giris.lineEdit_kullanici_adi.text() , self.kulanici_girisi.giris.lineEdit_parola.text() ) )
             self.conn.commit()
             self.bilgiler = self.cursor.fetchall()
             if self.bilgiler == []:
-                QMessageBox.critical(self,"Hata", "Kullanıcı adı veya Parola Hatalı !")
+                if self.gercek != []:
+                    QMessageBox.critical(self,"Hata",f"'{self.gercek[0][0]}' kullanıcısının parolası hatalı !!!")
+                if self.gercek == []:
+                    QMessageBox.critical(self,"Hata", "Kullanıcı adı veya Parola Hatalı !")
             if self.bilgiler != []:
                 if self.bilgiler[0].count(None) == 0 and len(str(self.bilgiler[0][4])) < 16 and len(str(self.bilgiler[0][4])) > 2 and int(self.bilgiler[0][4]) > 99 and int(self.bilgiler[0][4]) < 1000000000000000 and str(type(int(self.bilgiler[0][2]))) == "<class 'int'>":
                     self.cursor.execute("UPDATE NOW SET no = ? WHERE rowid = 1" , ( self.bilgiler[0][-1], ) )
@@ -1101,6 +1155,15 @@ class MainWindow(QMainWindow):
                     self.cursor.execute("UPDATE VERİLER SET giris_yapilma = ? WHERE rowid = ?" , ( self.gercek_giris_yapilma, self.now[0][0] ) )
                     self.conn.commit()
                     self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.bilgiler[0][0]}")
+
+                    if self.bilgiler[0][11] != "default":
+                        self.pixmap = QPixmap(f"users_photos\\{self.bilgiler[0][12]}{self.bilgiler[0][13]}")
+                        self.ana_manu.menu.kullanici_fotografi.setScaledContents(True)
+                        self.ana_manu.menu.kullanici_fotografi.setPixmap(self.pixmap)
+                    else:
+                        self.pixmap = QPixmap("default.png")
+                        self.ana_manu.menu.kullanici_fotografi.setScaledContents(True)
+                        self.ana_manu.menu.kullanici_fotografi.setPixmap(self.pixmap)
                     self.conn.commit()
                     self.kulanici_girisi.close()
                     self.ana_manu.show()
@@ -1125,14 +1188,12 @@ class MainWindow(QMainWindow):
                     self.cancel_button = self.hatamesaji.addButton("İptal", QMessageBox.RejectRole)
                     self.hatamesaji.exec_()
                     if self.hatamesaji.clickedButton() == self.yes_button:
-                        self.cursor.execute("DELETE FROM VERİLER WHERE rowid = ?",(self.gercek[0][-1],))
+                        self.cursor.execute("DELETE FROM VERİLER WHERE rowid = ?",(self.bilgiler[0][-1],))
                         self.conn.commit()
                         QMessageBox.information(self,"Başarılı","Hesap Başarıyla Silindi....")
                         
-                    elif self.hatamesaji.clickedButton() == self.no_button:
-                        pass
-                    elif self.hatamesaji.clickedButton() == self.cancel_button:
-                        pass
+                    elif self.hatamesaji.clickedButton() == self.no_button: ...
+                    elif self.hatamesaji.clickedButton() == self.cancel_button: ...
     def kaydol(self):
         self.cursor.execute("SELECT * FROM NOW")
         self.now = self.cursor.fetchall()
@@ -1143,7 +1204,9 @@ class MainWindow(QMainWindow):
             self.kulanici_girisi.close()
             self.ana_manu.show()
             self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.veriler[0][0]}")
-
+            self.pixmap = QPixmap("default.png")
+            self.ana_manu.menu.kullanici_fotografi.setScaledContents(True)
+            self.ana_manu.menu.kullanici_fotografi.setPixmap(self.pixmap)
         else:
 
             self.kullanici_adi = self.kulanici_girisi.giris.lineEdit_kullanici_adi.text()
@@ -1151,59 +1214,77 @@ class MainWindow(QMainWindow):
             self.transfer_kodu = randint(100,999999999999999)
             if 1 == 2:
                 pass
-
+            
             elif len(self.kullanici_adi) < 17 and len(self.kullanici_adi) > 3 or len(self.kullanici_adi) == 17:
 
                 if len(self.parola) > 4 and len(self.parola) < 20 or len(self.parola) == 20:
 
                     if self.kullanici_adi.count(":") == 0 and self.kullanici_adi.count(".") == 0 and self.kullanici_adi.count(",") == 0 and self.kullanici_adi.count(";") == 0 and self.kullanici_adi.count("*") == 0 and self.kullanici_adi.count("|") == 0 and self.kullanici_adi.count("\\") == 0 and self.kullanici_adi.count("}") == 0 and self.kullanici_adi.count("]") == 0 and self.kullanici_adi.count("[") == 0 and self.kullanici_adi.count("{") == 0 and self.kullanici_adi.count("½") == 0 and self.kullanici_adi.count("$") == 0 and self.kullanici_adi.count("#") == 0 and self.kullanici_adi.count("£") == 0 and self.kullanici_adi.count(">") == 0 and self.kullanici_adi.count("<") == 0 and self.kullanici_adi.count("_") == 0 and self.kullanici_adi.count("?") == 0 and self.kullanici_adi.count("=") == 0 and self.kullanici_adi.count("(") == 0 and self.kullanici_adi.count(")") == 0 and self.kullanici_adi.count("/") == 0 and self.kullanici_adi.count("&") == 0 and self.kullanici_adi.count("%") == 0 and self.kullanici_adi.count("+") == 0 and self.kullanici_adi.count("^") == 0 and self.kullanici_adi.count("'") == 0 and self.kullanici_adi.count("!") == 0 and self.kullanici_adi.count("@") == 0:
                         
-                        if self.parola.count(" ") == 0 and self.parola.count("	 ") == 0:
+                        if self.parola.count(" ") == 0 and self.parola.count("	") == 0:
                             self.olusturma_tarihi = datetime.datetime.now()
                             self.gercek_olusturma_tarihi = str(f"{self.olusturma_tarihi.year}/{self.olusturma_tarihi.month}/{self.olusturma_tarihi.day}")
                             self.gercek_olusturma_zamani = str(f"{self.olusturma_tarihi.hour}:{self.olusturma_tarihi.minute}:{self.olusturma_tarihi.second}")
                         
-                            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ?", ( self.kullanici_adi , ) )
-                            self.conn.commit()
+                            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kullanici_adi , self.parola ) )
                             self.hepsi = self.cursor.fetchall()
+                            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ?", ( self.kullanici_adi,) )
+                            self.varmi = self.cursor.fetchall()
                             if self.hepsi == []:
-                                self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE transfer_kodu = ?" , ( self.transfer_kodu, ) )
-                                self.kod = self.cursor.fetchall()
-                                if self.kod == []:
-                                    self.giris_yapilmak = datetime.datetime.now()
-                                    self.giris_yapilma_zamani = str(f"Tarih: {self.giris_yapilmak.year}/{self.giris_yapilmak.month}/{self.giris_yapilmak.day}   Saat: {self.giris_yapilmak.hour}:{self.giris_yapilmak.minute}:{self.giris_yapilmak.second}")
-                                    self.cursor.execute("""INSERT INTO VERİLER(isim, parola, para, hakkimda, transfer_kodu, yardim, tarih, saat, giris_yapilma, transfer_yapilma_sayisi, transfer_yapma_sayisi) VALUES(?,?,?,?,?,?,?,?,?,?,?)""" , ( self.kullanici_adi, self.parola, 0, "", self.transfer_kodu,0, self.gercek_olusturma_tarihi, self.gercek_olusturma_zamani,  self.giris_yapilma_zamani, 0, 0 ) )
-                                    self.conn.commit()
-                                    self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ?", ( self.kullanici_adi , ) )
-                                    self.conn.commit()
-                                    self.hepsi = self.cursor.fetchall()
-                                    self.cursor.execute("UPDATE NOW SET no = ? WHERE rowid = 1" , ( self.hepsi[0][-1], ) )
-                                    self.conn.commit()
-                                    QMessageBox.information(self,"Başarılı","Hesap Başarıyla Oluşturuldu")
-                                    self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.hepsi[0][0]}")
-                                    self.kulanici_girisi.close()
-                                    self.ana_manu.show()
-                                if self.kod != []:
-                                    while True:
-                                        if self.kod == []:
-                                            
-                                            self.giris_yapilmak = datetime.datetime.now()
-                                            self.giris_yapilma_zamani = str(f"Tarih: {self.giris_yapilmak.year}/{self.giris_yapilmak.month}/{self.giris_yapilmak.day}   Saat: {self.giris_yapilmak.hour}:{self.giris_yapilmak.minute}:{self.giris_yapilmak.second}")
-                                            self.cursor.execute("""INSERT INTO VERİLER(isim, parola, para, hakkimda, transfer_kodu, yardim, tarih, saat, giris_yapilma, transfer_yapilma_sayisi, transfer_yapma_sayisi) VALUES(?,?,?,?,?,?,?,?,?,?,?)""" , ( self.kullanici_adi, self.parola, 0, "", self.transfer_kodu,0, self.gercek_olusturma_tarihi, self.gercek_olusturma_zamani,  self.giris_yapilma_zamani, 0, 0 ) )
-                                            self.conn.commit()
-                                            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kullanici_adi , self.parola ) )
-                                            self.conn.commit()
-                                            self.hepsi = self.cursor.fetchall()
-                                            self.cursor.execute("UPDATE NOW SET no = ? WHERE rowid = 1" , ( self.hepsi[0][-1], ) )
-                                            self.conn.commit()
-                                            QMessageBox.information(self,"Başarılı","Hesap Başarıyla Oluşturuldu")
-                                            self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.hepsi[0][0]}")
-                                            self.kulanici_girisi.close()
-                                            self.ana_manu.show()
-                                            break
-                                        self.transfer_kodu = randint(100,9)
-                                        self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE transfer_kodu = ?" , ( self.transfer_kodu, ) )
-                                        self.kod = self.cursor.fetchall()
+                                if self.varmi == []:
+                                    self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE transfer_kodu = ?" , ( self.transfer_kodu, ) )
+                                    self.kod = self.cursor.fetchall()
+                                    if self.kod == []:
+                                        self.giris_yapilmak = datetime.datetime.now()
+                                        self.giris_yapilma_zamani = str(f"Tarih: {self.giris_yapilmak.year}/{self.giris_yapilmak.month}/{self.giris_yapilmak.day}   Saat: {self.giris_yapilmak.hour}:{self.giris_yapilmak.minute}:{self.giris_yapilmak.second}")
+                                        self.cursor.execute("""INSERT INTO VERİLER(isim, parola, para, hakkimda, transfer_kodu, yardim, tarih, saat, giris_yapilma, transfer_yapilma_sayisi, transfer_yapma_sayisi, photo_id, photo_code, uzanti) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)""" , ( self.kullanici_adi, self.parola, 0, "", self.transfer_kodu,0, self.gercek_olusturma_tarihi, self.gercek_olusturma_zamani,  self.giris_yapilma_zamani, 0, 0 ,"default", self.random_code(), "") )
+                                        self.conn.commit()
+                                        self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kullanici_adi , self.parola ) )
+                                        self.conn.commit()
+                                        self.veriler = self.cursor.fetchall()
+                                        self.cursor.execute("UPDATE NOW SET no = ? WHERE rowid = 1" , ( self.veriler[0][-1], ) )
+                                        self.conn.commit()
+                                        self.pixmap = QPixmap("default.png")  # Resim dosyanızın yolu
+                                        self.ana_manu.menu.kullanici_fotografi.setScaledContents(True)
+                                        self.ana_manu.menu.kullanici_fotografi.setPixmap(self.pixmap)
+                                        QMessageBox.information(self,"Başarılı","Hesap Başarıyla Oluşturuldu")
+                                        self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.veriler[0][0]}")
+                                        self.kulanici_girisi.close()
+                                        self.ana_manu.show()
+                                    if self.kod != []:
+                                        while True:
+                                            if self.kod == []:
+                                                
+                                                self.giris_yapilmak = datetime.datetime.now()
+                                                self.giris_yapilma_zamani = str(f"Tarih: {self.giris_yapilmak.year}/{self.giris_yapilmak.month}/{self.giris_yapilmak.day}   Saat: {self.giris_yapilmak.hour}:{self.giris_yapilmak.minute}:{self.giris_yapilmak.second}")
+                                                self.cursor.execute("""INSERT INTO VERİLER(isim, parola, para, hakkimda, transfer_kodu, yardim, tarih, saat, giris_yapilma, transfer_yapilma_sayisi, transfer_yapma_sayisi, photo_id, photo_code, uzanti) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)""" , ( self.kullanici_adi, self.parola, 0, "", self.transfer_kodu,0, self.gercek_olusturma_tarihi, self.gercek_olusturma_zamani,  self.giris_yapilma_zamani, 0, 0 ,"default",self.random_code(), "") )
+                                                self.conn.commit()
+                                                self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE isim = ? AND parola = ?", ( self.kullanici_adi , self.parola ) )
+                                                self.conn.commit()
+                                                self.hepsi = self.cursor.fetchall()
+                                                self.cursor.execute("UPDATE NOW SET no = ? WHERE rowid = 1" , ( self.hepsi[0][-1], ) )
+                                                self.conn.commit()
+                                                QMessageBox.information(self,"Başarılı","Hesap Başarıyla Oluşturuldu")
+                                                self.ana_manu.menu.label_hos_geldiniz.setText(f"Hoş Geldiniz, {self.hepsi[0][0]}")
+                                                self.pixmap = QPixmap("default.png")  # Resim dosyanızın yolu
+                                                self.ana_manu.menu.kullanici_fotografi.setPixmap(self.pixmap)  # Resmin label'e sığması için
+                                                scaled_pixmap = self.pixmap.scaled(
+                                                    200, 200,  # QLabel'in boyutunu kontrol etmek için istediğiniz değerleri girin
+                                                    # En-boy oranını koru
+                                                )
+                                                self.ana_manu.menu.kullanici_fotografi.setPixmap(scaled_pixmap)
+                                                self.ana_manu.menu.kullanici_fotografi.setScaledContents(True)
+                                                self.ana_manu.menu.kullanici_fotografi.setScaledContents(True)
+                                                self.ana_manu.menu.kullanici_fotografi.setPixmap(self.pixmap)
+                                                self.ana_manu.menu.kullanici_fotografi.setScaledContents(True) 
+                                                self.kulanici_girisi.close()
+                                                self.ana_manu.show()
+                                                break
+                                            self.transfer_kodu = randint(100,999999999999999)
+                                            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE transfer_kodu = ?" , ( self.transfer_kodu, ) )
+                                            self.kod = self.cursor.fetchall()
+                                if self.varmi != []:
+                                     QMessageBox.critical(self,"Hata",f"'{self.varmi[0][0]}' adında bir hesap zaten bulunuyor !!!")
                             elif self.hepsi != []:
                                 QMessageBox.critical(self,"Hata","Böyle bir Hesap Zaten Var....")
                         else:
@@ -1223,9 +1304,9 @@ class MainWindow(QMainWindow):
             self.hepsi = self.cursor.fetchall()
             self.conn.commit()
             if self.hepsi[0][2] == 0:
-                QMessageBox.information(self,"Toplam Bakiye:","Bakiyenizde Malesef Hiç Para Bulunmuyor : (")
+                QMessageBox.information(self,"Toplam Bakiye:","Bakiyenizde Malesef Hiç Para Bulunmuyor")
             elif self.hepsi[0][2] != 0:
-                QMessageBox.information(self,"Toplam Bakiye:",f"Bakiyenizde Toplamda {self.hepsi[0][2]}$ Bulunuyor : )")
+                QMessageBox.information(self,"Toplam Bakiye:",f"Bakiyenizde Toplamda {self.hepsi[0][2]}$ Bulunuyor")
 
         except Exception:
             self.cursor.execute(f"UPDATE NOW SET no = {int(0)} WHERE rowid = {int(1)}")
@@ -1268,34 +1349,95 @@ class MainWindow(QMainWindow):
         self.yatirma_terminali.close()
         self.ana_manu.show()
     def yeni_surum(self):
-        import requests
+        self.onay_sorisi = QMessageBox.question(self,"Emin misiniz ?", "Yeni sürümü yüklemek istediğinizden gerçekten emin misiniz ?", QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
+        if self.onay_sorisi == QMessageBox.Yes:
+            import requests
 
-        # GitHub'daki dosyanın ham içeriği için URL
-        url = "https://raw.githubusercontent.com/hazarhghg/update_text/main/update.html"
+            # GitHub'daki dosyanın ham içeriği için URL
+            url = "https://raw.githubusercontent.com/hazarhghg/update_text/main/update.html"
 
-        try:
-            # Sayfanın içeriğini al
-            response = requests.get(url)
+            try:
+                # Sayfanın içeriğini al
+                response = requests.get(url)
 
-            # Durum kodunu kontrol et
-            if response.status_code == 200:
-                # Başarılıysa, içeriği bir değişkene atayın
-                html_icerik = response.text.replace("\n","")
-                
-                with open(f"{__file__}","w",encoding="utf-8") as file:
-                    file.write(html_icerik)
-                    self.mesaj = QMessageBox.information(self,"Başarılı","Yeni Sürüm Başarıyla yüklendi",
-                                                        QMessageBox.Yes |
-                                                        QMessageBox.Cancel)
-                    startfile(f"{__file__}")
-                    exit()
-            else:
-                print(f"Sayfa yüklenemedi. Hata kodu: {response.status_code}")
+                # Durum kodunu kontrol et
+                if response.status_code == 200:
+                    # Başarılıysa, içeriği bir değişkene atayın
+                    html_icerik = response.text.replace("\n","")
+                    
+                    with open(f"{__file__}","w",encoding="utf-8") as file:
+                        file.write(html_icerik)
+                        self.mesaj = QMessageBox.information(self,"Başarılı","Yeni Sürüm Başarıyla yüklendi",
+                                                            QMessageBox.Yes |
+                                                            QMessageBox.Cancel)
+                        startfile(f"{__file__}")
+                        exit()
+                else:
+                    QMessageBox.critical(self,"Hata","Bir hata oluştu. Lütfen daha sonra tekrar deneyin.")
 
-        except requests.ConnectionError:
-            QMessageBox.warning(self,"İnternet Yok","İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin.")
-        except Exception as e:
-            QMessageBox.warning(self,"Hata",f"Hata {e}")
+            except requests.ConnectionError:
+                QMessageBox.warning(self,"İnternet Yok","İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin.")
+            except Exception as e:
+                QMessageBox.warning(self,"Hata",f"Hata {e}")
+
+        if self.onay_sorisi == QMessageBox.No: ...
+        if self.onay_sorisi == QMessageBox.Cancel: ...
+
+    def fotograf_degistir(self):
+        
+        import os
+        
+        # Dosya seçici penceresini oluştur
+        options = QFileDialog.Options()
+        options |= QFileDialog.ReadOnly  # Dosyalar yalnızca okunabilir modda açılır.
+        
+        # Dosya seçimi için filtre belirle
+        file_filter = "Fotograf Dosyalari (*.png *.jpg *.jpeg *.ico);;All Files (*)"
+        
+        # QFileDialog'u aç ve dosya yolunu al
+        file_path, _ = QFileDialog.getOpenFileName(self, 
+                                                   "Bir dosya seçin", 
+                                                   "", 
+                                                   file_filter, 
+                                                   options=options)
+        
+        
+        if file_path:
+            from shutil import copy
+            file_name, file_extension = os.path.splitext(file_path)
+            self.cursor.execute("SELECT * FROM NOW")
+            self.now = self.cursor.fetchall()
+            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE rowid = ?",(self.now[0][0],))
+            self.veriler2 = self.cursor.fetchall()
+            self.cursor.execute("UPDATE VERİLER SET uzanti = ? WHERE rowid = ?" , (file_extension , self.now[0][0],) )
+            self.cursor.execute("UPDATE VERİLER SET photo_id = ? WHERE rowid = ?" , ("not default" , self.now[0][0],) )
+            self.tum_ogeler = [os.path.join("users_photos/", eleman) for eleman in os.listdir("users_photos/")]
+            self.conn.commit()
+            self.cursor.execute("SELECT * FROM NOW")
+            self.now = self.cursor.fetchall()
+            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE rowid = ?",(self.now[0][0],))
+            self.veriler = self.cursor.fetchall()
+    
+            dosya_yolu = f"users_photos\\{self.veriler[0][12]}{self.veriler[0][13]}"
+            dosya_adi = os.path.basename(dosya_yolu)
+            ad, uzanti = os.path.splitext(dosya_adi)
+            #---------------------------------------
+            # Dosyayı silmeden hemen önce veritabanındaki uzantıyı al ve onu sil : )
+            dosya_yolu = f"users_photos/{self.veriler[0][12]}{self.veriler[0][13]}"            
+            dosya_adi = os.path.basename(dosya_yolu)
+            ad, uzanti = os.path.splitext(dosya_adi)
+            try:
+                os.remove(f"users_photos/{self.veriler2[0][12]}{self.veriler2[0][13]}")
+            except Exception: ...
+            #--------------------------------------------------
+
+            copy(file_path, f"users_photos\\{self.veriler[0][12]}{self.veriler[0][13]}")
+            self.pixmap = QPixmap(f"users_photos\\{self.veriler[0][12]}{self.veriler[0][13]}")  # Resim dosyanızın yolu
+            self.ana_manu.menu.kullanici_fotografi.setScaledContents(True)
+            self.ana_manu.menu.kullanici_fotografi.setPixmap(self.pixmap)
+
+
+
     def para_yatirma_onay(self):
         
         try:
@@ -1460,6 +1602,13 @@ class MainWindow(QMainWindow):
         else:
             QMessageBox.critical(self,"Hata","Parolanızın İçerisine Boşluk Koyamassınız !!!")
     def hesabi_sil(self):
+        try:
+            self.cursor.execute("SELECT * FROM NOW")
+            self.now = self.cursor.fetchall()
+            self.cursor.execute("SELECT *,rowid FROM VERİLER WHERE rowid = ?",(self.now[0][0],))
+            self.veriler = self.cursor.fetchall()
+            os.remove(f"users_photos\\{self.veriler[0][12]}{self.veriler[0][13]}")
+        except Exception: ...
         self.hesabı_silme_uyarı_mesajı = QMessageBox(self)
         self.hesabı_silme_uyarı_mesajı.setWindowTitle("Emin Misiniz ?")
         self.hesabı_silme_uyarı_mesajı.setText("Hesabı KALICI Olarak Silmek İstediğinizden Emin misiniz ?\nBu İşlem Geri Alınmaz...\n\nİstemiyorsanız Uyaryı Kapatabilirsiniz.....")
@@ -1586,23 +1735,7 @@ class MainWindow(QMainWindow):
         self.cursor.execute("INSERT INTO GÖNDERİLENLER(yazi, gonderen, gonderilme_tarihi, begeni, dislike, no) VALUES(?,?,?,?,?,?)" , ( self.gonderilecek_yazi, self.veriler[0][0], self.şimdi_yazisi, 0, 0, self.veriler[0][-1] ) )
         self.conn.commit()
         QMessageBox.information(self,"Başarılı","Yazı Başarıyla Yayınlandı : )")
-    def gonderiler(self):
 
-        with open("Güncelleme Notları.txt","w",encoding="utf-8") as self.update_notes:
-            self.update_notes.write("""
-+++++++++++++++++++++++
-Güncelleme Notları
-+++++++++++++++++++++++
-
-Bu Proje 2024 yılında ** ayının **. gününde geliştirilmeye başlandı
-
-...
-
-Daha Fazlası İçin https://youtube.com/@pewdiepie adresine gidebilirsiniz : )
-
-
-            """)
-            startfile("Güncelleme Notları.txt")
     def gonderi_ayarlari(self):
         QMessageBox.information(self,"Bilgi","Bu Proje Hazar **** tarafından geliştirilmiştir.....")
     def geri_donme(self):
@@ -1712,7 +1845,10 @@ Daha Fazlası İçin https://youtube.com/@pewdiepie adresine gidebilirsiniz : )
         self.detayli_bilgi.detayli_bilgi.lineEdit_hesaba_giris_yapilma_tarihi.setPlaceholderText(str(f"{self.veriler[0][8]}"))
         self.detayli_bilgi.detayli_bilgi.lineEdit_hesaba_yapilan_transfer_sayisi.setPlaceholderText(f"{self.veriler[0][9]}")
         self.detayli_bilgi.detayli_bilgi.lineEdit_hesabin_transfer_yapma_sayisi.setPlaceholderText(f"{self.veriler[0][10]}")
-
+    def CloseEvent(self, event):
+        self.conn.close()
+        event.accept()
 app = QApplication([])
 mainwindow = MainWindow()
 app.exec_()
+system("pause")
